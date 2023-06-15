@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-orange.min.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <style>
+        body {
+            display: flex;
+            height: 100vh;
+        }
+        .mdc-list {
+            display: flex;
+            flex-direction: column;
+        }
+        .mdc-drawer__header {
+            padding: 10px;
+        }
+        .mdc-list-item {
+            padding: 10px;
+            display: flex;
+            flex-direction: row;
+            text-decoration: none;
+        }
+        .mdc-list-item__text {
+            padding-left: 10px;
+        }
+        .mdc-drawer {
+            border-right-color: rgba(0,0,0,.12);
+            border-right-style: solid;
+            width: 10%;
+        }
+    </style>
+</head>
+<body>
+<aside class="mdc-drawer">
+<div class="mdc-drawer__header">
+    <h3 class="mdc-drawer__title">Insurance system</h3>
+    <h6 class="mdc-drawer__subtitle">Java + Spring</h6>
+</div>
+<div class="mdc-drawer__content">
+    <nav class="mdc-list">
+        <a class="mdc-list-item" href="/contract/">
+            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">send</i>
+            <span class="mdc-list-item__text">Contracts</span>
+        </a>
+        <a class="mdc-list-item" href="/user/">
+            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">drafts</i>
+            <span class="mdc-list-item__text">Users</span>
+        </a>
+    </nav>
+</div>
+</aside>
+    <div style="display: flex; flex-direction: column; width: 100%; overflow: auto">
+        <h1 style="margin: 10px;" th:text="${user.getFullName()} "></h1>
+        <ul class="demo-list-item mdl-list">
+            <li class="mdl-list__item">
+            <span class="mdl-list__item-primary-content">
+                <span>PID:&nbsp;</span>
+                <span th:text="${user.pid}"></span>
+            </span>
+            </li>
+            <li class="mdl-list__item">
+            <span class="mdl-list__item-primary-content">
+                <span>Email:&nbsp;</span>
+                <span th:text="${user.email}"></span>
+            </span>
+            </li>
+            <li class="mdl-list__item">
+            <span class="mdl-list__item-primary-content">
+                <span>Permanent address:&nbsp;</span>
+                <span th:text="${user.getFullPermanentAdress()}"></span>
+            </span>
+            </li>
+            <li class="mdl-list__item">
+            <span class="mdl-list__item-primary-content">
+                <span>Temporary address:&nbsp;</span>
+                <span th:text="${user.getFullTemporaryAdress()}"></span>
+            </span>
+            </li>
+            <table class="mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--2dp" style="margin: 10px">
+                <thead>
+                <tr>
+                    <th class="mdl-data-table__cell--non-numeric">Date of Formation</th>
+                    <th class="mdl-data-table__cell--non-numeric">Date of Commencement</th>
+                    <th class="mdl-data-table__cell--non-numeric">Date of Termination</th>
+                    <th class="mdl-data-table__cell--non-numeric">Monthly payment</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="contract: ${contracts}">
+                    <td th:text="${contract.getValue().getDateOfFormation()}" class="mdl-data-table__cell--non-numeric"></td>
+                    <td th:text="${contract.getValue().getCommencementOfInsurance()}" class="mdl-data-table__cell--non-numeric"></td>
+                    <td th:text="${contract.getValue().getTerminationOfInsurance()}" class="mdl-data-table__cell--non-numeric"></td>
+                    <td th:text="${contract.getValue().getMonthlyPayment()}" class="mdl-data-table__cell--non-numeric"></td>
+                    <td class="mdl-data-table__cell--non-numeric">
+                        <a th:href="@{'/user/id/'+${user.id}+'/contract/' +${contract.getValue().getGetType()} +'/id/' + ${contract.getValue().id} }" >
+                            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">info</i>
+                        </a>
+                    </td>
+                    <td class="mdl-data-table__cell--non-numeric">
+                        <a th:href="@{'/user/id/'+${user.id}+'/contract/' +${contract.getValue().getGetType()} +'/update/' + ${contract.getValue().id} }" >
+                            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">edit</i>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </ul>
+        <td class="mdl-data-table__cell--non-numeric">
+            <a th:href="@{'/user/update/'+ ${user.id}}" >
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">update</i>
+                <span class="mdc-list-item__text">update user</span>
+            </a></td>
+        <td class="mdl-data-table__cell--non-numeric">
+            <a th:href="@{'/user/id/'+${user.id}+'/contractSelection'}" >
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">edit</i>
+                <span class="mdc-list-item__text">new contract</span>
+            </a>
+        </td>
+    </div>
+
+
+</body>
+</html>

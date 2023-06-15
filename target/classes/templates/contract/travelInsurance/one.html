@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-orange.min.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <style>
+        body {
+            display: flex;
+            height: 100vh;
+        }
+        .mdc-list {
+            display: flex;
+            flex-direction: column;
+        }
+        .mdc-drawer__header {
+            padding: 10px;
+        }
+        .mdc-list-item {
+            padding: 10px;
+            display: flex;
+            flex-direction: row;
+            text-decoration: none;
+        }
+        .mdc-list-item__text {
+            padding-left: 10px;
+        }
+        .mdc-drawer {
+            border-right-color: rgba(0,0,0,.12);
+            border-right-style: solid;
+            width: 10%;
+        }
+    </style>
+</head>
+
+<body>
+<aside class="mdc-drawer">
+    <div class="mdc-drawer__header">
+        <h3 class="mdc-drawer__title">Insurance system</h3>
+        <h6 class="mdc-drawer__subtitle">Java + Spring</h6>
+    </div>
+    <div class="mdc-drawer__content">
+        <nav class="mdc-list">
+            <a class="mdc-list-item" href="/contract/">
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">send</i>
+                <span class="mdc-list-item__text">Contracts</span>
+            </a>
+            <a class="mdc-list-item" href="/user/">
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">drafts</i>
+                <span class="mdc-list-item__text">Users</span>
+            </a>
+        </nav>
+    </div>
+</aside>
+
+<table class="mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--2dp" style="margin: 10px">
+    <thead>
+    <table class="mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--2dp" style="margin: 10px">
+        <thead>
+        <tbody>
+        <tr>
+            <ul class="demo-list-item mdl-list">
+                <li class="mdl-list__item">
+            <span class="mdl-list__item-primary-content">
+                <span>Contract ID:&nbsp;</span>
+                <span th:text="${contract.id}"></span>
+            </span>
+                </li>
+                <li class="mdl-list__item">
+            <span class="mdl-list__item-primary-content">
+                <span>Insured:&nbsp;</span>
+                <span th:text="${contract.insured.getFullName()}"></span>
+            </span>
+                </li>
+                <li class="mdl-list__item">
+            <span class="mdl-list__item-primary-content">
+                <span> Insurer:&nbsp;</span>
+                <span th:text="${contract.insurer.getFullName()}"></span>
+            </span>
+                </li>
+                <li class="mdl-list__item">
+            <span class="mdl-list__item-primary-content">
+                <span> Date of formation:&nbsp;</span>
+                <span th:text="${contract.dateOfFormation}"></span>
+            </span>
+                </li>
+                <li class="mdl-list__item">
+            <span class="mdl-list__item-primary-content">
+                <span>Date of commencement:&nbsp;</span>
+                <span th:text="${contract.commencementOfInsurance}"></span>
+            </span>
+                </li>
+                <li class="mdl-list__item">
+            <span class="mdl-list__item-primary-content">
+                <span>Date of termination:&nbsp;</span>
+                <span th:text="${contract.terminationOfInsurance}" ></span>
+            </span>
+                </li>
+                <li class="mdl-list__item">
+            <span class="mdl-list__item-primary-content">
+                <span> Monthly payment:&nbsp;</span>
+                <span th:text="${contract.monthlyPayment}"></span>
+            </span>
+                </li>
+                <li class="mdl-list__item">
+            <span class="mdl-list__item-primary-content">
+                <span> Insurance indemnity:&nbsp;</span>
+                <span th:text="${contract.insuranceIndemnity}"></span>
+            </span>
+                </li>
+                <li class="mdl-list__item">
+            <span class="mdl-list__item-primary-content">
+                <span>Travel purpose:&nbsp;</span>
+                <span th:text="${contract.travelPurpose}"></span>
+            </span>
+                </li>
+                <li class="mdl-list__item">
+            <span class="mdl-list__item-primary-content">
+                <span>In EU:&nbsp;</span>
+                <span th:text="${contract.isInEuString()}" ></span>
+            </span>
+                </li>
+            </ul>
+            <td class="mdl-data-table__cell--non-numeric">
+                <a th:href="@{'/user/id/'+${userId}+'/contract/travel_insurance/update/'+ ${contract.id}}" >
+                    <i class="material-icons mdc-list-item__graphic" aria-hidden="true">update</i>
+                    <span class="mdc-list-item__text">update contract</span>
+                </a></td>
+        </tr>
+        </tbody>
+    </table>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
+</body>
+</html>
